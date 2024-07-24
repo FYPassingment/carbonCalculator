@@ -1,11 +1,11 @@
-# .github/workflows/test.yml
+# .github/workflows/ci.yml
 
-name: Test
+name: CI
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,10 +23,9 @@ jobs:
       - name: Run Cucumber tests
         run: npm run test:cucumber
 
-      # Example of reporting results to Jira
-      # - name: Report results to Jira
-      #   run: ./report-to-jira.sh
-      #   env:
-      #     JIRA_USER: ${{ secrets.JIRA_USER }}
-      #     JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-      #     JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+      - name: Upload test results to Xray
+        run: node upload-results.js
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER: ${{ secrets.JIRA_USER }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
