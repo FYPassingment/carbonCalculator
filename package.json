@@ -6,7 +6,8 @@
     "scripts": {
         "build": "npm pack",
         "start": "node index.js",
-        "dev": "nodemon index.js"
+        "dev": "nodemon index.js",
+        "test:cucumber": "cucumber-js"
     },
     "dependencies": {
         "@npmcli/fs": "^3.1.0",

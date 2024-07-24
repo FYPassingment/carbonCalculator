@@ -1,0 +1,32 @@
+# .github/workflows/test.yml
+
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cucumber tests
+        run: npm run test:cucumber
+
+      # Example of reporting results to Jira
+      # - name: Report results to Jira
+      #   run: ./report-to-jira.sh
+      #   env:
+      #     JIRA_USER: ${{ secrets.JIRA_USER }}
+      #     JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      #     JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
